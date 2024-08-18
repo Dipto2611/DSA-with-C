@@ -25,7 +25,8 @@ void enQ(int value){                //here no val is coming so void used
     else{
         r++;               // else ek ghar aage badha do
     }
-    arr[r]=value;
+    arr[r]=value;           //value update kro queue mein (impt)
+    
     printf("Enqueued: %d\n", value); //// Confirmation message
 }
 
@@ -34,9 +35,9 @@ void deQ(){
         printf("Queue is empty.");
         return ;
     }
-    if (f==r){  ///when only 1 item is present in list
-        printf("Deleted element is: %d\n", arr[f]); //new line
-        f=r=-1; // pop this out and return the pointer to prev pos. i.e -1
+    if (f==r){          ///when only 1 item is present in list
+        printf("Deleted element is: %d\n", arr[f]);     ///f ka index pop hua h (new line)
+        f=r=-1;         // pop this out and return the pointer to prev pos. i.e -1
     }
     else{
         printf("Deleted element is: %d",arr[f]);
