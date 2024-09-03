@@ -32,7 +32,7 @@ node * createLinkedList(){
             while(p->next!=NULL){
                 p=p->next;    //its like p++  or // Move to the next node
             }
-            p->next=newnode;  // Link the new node at the end
+            p->next=newnode;  // Link the new node at the end (its for linking only dont copy to QLL)
         }
 
         printf("Do you want to continue (1|0) is (Y|N):");
