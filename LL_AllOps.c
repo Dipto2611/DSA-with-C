@@ -1,17 +1,19 @@
+/// Whole linked list functions and ops///
+
 #include <stdio.h>
 #include <stdlib.h>
 
 typedef struct node {
     int data;
     struct node* next;
-} node;
+}node;
 
-node* head = NULL;
+node* head = NULL;   //make it null firstly
 
-node* normalEntry() {
+void normalEntry() {
     int choice = 1;
     node* newnode;
-    node* p; //pointer
+    node* p;  //pointer
     while (choice != 0) {
         newnode = (node*)malloc(sizeof(node));
         newnode->next = NULL;
@@ -21,36 +23,15 @@ node* normalEntry() {
             head = newnode;
         } else {
             p = head;  // Initialize p to head
-            while (p->next != NULL) {
+            while (p->next != NULL) {  //recall that eg 
                 p = p->next;
             }
             p->next = newnode;
         }
+        //Outside of that loop (Remember*) & inside of while
         printf("Do you want to continue (1|0) is (Y|N): ");
         scanf("%d", &choice);
     }
-}
-
-void insert_at_begin(int val) {
-    node* newnode = (node*)malloc(sizeof(node));
-    newnode->data = val;
-    newnode->next = head;
-    head = newnode;
-}
-
-void insert_at_end(int val) {
-    node* newnode = (node*)malloc(sizeof(node));
-    newnode->data = val;
-    newnode->next = NULL;
-    if (head == NULL) {
-        head = newnode;
-        return;
-    }
-    node* p = head;
-    while (p->next != NULL) {
-        p = p->next;
-    }
-    p->next = newnode;
 }
 
 int length() {
@@ -63,20 +44,53 @@ int length() {
     return count;
 }
 
+//  *INSERTION* :
+
+//performing Right to Left insert
+void insert_at_begin(int val) {
+    node* newnode = (node*)malloc(sizeof(node));
+    newnode->data = val;
+    newnode->next = head;
+    head = newnode;
+}
+//performing Left to Right insert
+void insert_at_end(int val) {
+    node* newnode = (node*)malloc(sizeof(node));
+    newnode->data = val;
+    newnode->next = NULL;
+    if (head == NULL) {
+        head = newnode;
+        return;
+    }
+    
+    node* p = head;
+    
+    while (p->next != NULL) {
+        p = p->next;
+    }
+    p->next = newnode;  //as before just link it
+}
+
+
 void insert_specific(int val, int loc) {
-    if (loc > length()) {
-        printf("Exceeds the limit\n");
-    } else {
+    
+    if (loc < 0 || loc > length()) {
+        printf("Invalid location\n");
+    } 
+    else {
         if (loc == 0) {
             insert_at_begin(val);
+        
         } else if (loc == length()) {
             insert_at_end(val);
+        
         } else {
-            node* newnode = (node*)malloc(sizeof(node));
+            node* newnode = (node*)malloc(sizeof(node)); //here new node created
             newnode->data = val;
             newnode->next = NULL;
-            node* p = head;
-            for (int index = 0; index < loc - 1; index++) {
+            
+            node* p = head;  //pointing p to head
+            for (int index = 0; index < loc - 1; index++) {  //here indexing k saaath chalega
                 p = p->next;
             }
             newnode->next = p->next;
@@ -85,13 +99,15 @@ void insert_specific(int val, int loc) {
     }
 }
 
+// *DELETION* :
+
 void delete_at_begin() {
     if (head == NULL) {
         printf("List is already empty\n");
         return;
     }
-    node* temp = head;
-    head = head->next;
+    node* temp = head; //temp is assigned to head for traversal
+    head = head->next; // just inc. the head to the next consecutive node and del the first one
     free(temp);
 }
 
@@ -106,27 +122,30 @@ void delete_at_end() {
         return;
     }
     node* p = head;
-    while (p->next->next != NULL) {
-        p = p->next;
+    while (p->next->next != NULL) {   //as usual check till 2nd last node
+        p = p->next;       //if not found, increment it as ususal
     }
-    free(p->next);
+    free(p->next);  //when finds it free the last node and make 2nd last_node->next to NULL
     p->next = NULL;
 }
 
 void delete_specific(int loc) {
-    if (loc >= length()) {
-        printf("Exceeds the limit\n");
+    
+    if (loc < 0 || loc > length()){
+        printf("Invalid location\n");
         return;
     }
+    
     if (loc == 0) {
         delete_at_begin();
+    
     } else {
         node* p = head;
-        for (int index = 0; index < loc - 1; index++) {
+        for (int index = 0; index < loc - 1; index++) { //here indexing k saaath chalega
             p = p->next;
         }
-        node* temp = p->next;
-        p->next = p->next->next;
+        node* temp = p->next; // Node to delete
+        p->next = p->next->next; //skips the del node and link the others by this
         free(temp);
     }
 }
@@ -140,7 +159,7 @@ void display() {
             printf("%d->", p->data);
             p = p->next;
         }
-        printf("NULL\n");
+        printf("NULL\n"); //for printing last part to show null
     }
 }
 
@@ -148,53 +167,57 @@ int main() {
     int choice, data, location;
     while (1) {
         printf("\nLinked List Operations:\n");
-        printf("1. Insert at Beginning\n");
-        printf("2. Insert at End\n");
-        printf("3. Insert at Specific Location\n");
-        printf("4. Delete at Beginning\n");
-        printf("5. Delete at End\n");
-        printf("6. Delete at Specific Location\n");
-        printf("7. Print List\n");
-        printf("8. Print Length\n");
-        printf("9. Exit\n");
+        printf("1. Normal Entry (Multiple Nodes)\n");
+        printf("2. Insert at Beginning\n");
+        printf("3. Insert at End\n");
+        printf("4. Insert at Specific Location\n");
+        printf("5. Delete at Beginning\n");
+        printf("6. Delete at End\n");
+        printf("7. Delete at Specific Location\n");
+        printf("8. Print List\n");
+        printf("9. Print Length\n");
+        printf("10. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
+                normalEntry();  // Call the normal entry function for inserting multiple nodes
+                break;
+            case 2:
                 printf("Enter data to insert at beginning: ");
                 scanf("%d", &data);
                 insert_at_begin(data);
                 break;
-            case 2:
+            case 3:
                 printf("Enter data to insert at end: ");
                 scanf("%d", &data);
                 insert_at_end(data);
                 break;
-            case 3:
+            case 4:
                 printf("Enter data to insert: ");
                 scanf("%d", &data);
                 printf("Enter location: ");
                 scanf("%d", &location);
                 insert_specific(data, location);
                 break;
-            case 4:
+            case 5:
                 delete_at_begin();
                 break;
-            case 5:
+            case 6:
                 delete_at_end();
                 break;
-            case 6:
+            case 7:
                 printf("Enter location to delete: ");
                 scanf("%d", &location);
                 delete_specific(location);
                 break;
-            case 7:
+            case 8:
                 display();
                 break;
-            case 8:
+            case 9:
                 printf("Length of the list: %d\n", length());
                 break;
-            case 9:
+            case 10:
                 return 0;
             default:
                 printf("Invalid choice. Please try again.\n");
