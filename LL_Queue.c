@@ -8,12 +8,12 @@ typedef struct node{
 }node;
 
 /// here 0 is NULL only 
-struct node* front=NULL; //most imp take the struct part not the int of something
-struct node* rear=NULL;
+node* front=NULL; //most imp take the struct part not the int of something
+node* rear=NULL;
 
 void enqueue(int val){
-    struct node* newnode;
-    newnode=(struct node*)malloc(sizeof(node));
+    node* newnode;
+    newnode=(node*)malloc(sizeof(node));
 
     newnode->data=val;  //define a node [data|next]
     newnode->next=NULL;
@@ -29,7 +29,7 @@ void enqueue(int val){
 
 /// here FIFO is used so temp will point the Front only as for deletion.
 void dequeue(){
-    struct node*temp;
+    node*temp;
     temp=front; //front ka value is assigned to temp not the vice versa!!
      
     if(front==NULL && rear==NULL){
