@@ -22,7 +22,7 @@ void push() {
     int a;
     printf("Enter element: ");
     scanf("%d", &a);
-    top+=1;
+    top+=1; //top++
     stack[top]=a;
 }
 
