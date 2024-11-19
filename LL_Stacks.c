@@ -6,11 +6,10 @@ typedef struct node {
     struct node *next;
 } node;
 
-node* top = NULL;
+node* top = NULL; //its imp for top to be in stck
 
 void push(int val) {
     node* newnode = (node*)malloc(sizeof(node));
-
     newnode->data = val;
     newnode->next = top;
     top = newnode; // top points to the new node

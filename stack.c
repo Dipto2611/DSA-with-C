@@ -1,12 +1,13 @@
 #include <stdio.h>
 
-#define N 5
+#define N 5  //for arry thing define is must
 
 int stack[N];
-int top = -1;
+int top = -1; //make it -1 at 1st
 
+//return top== is must 
 int isEmpty() {
-    return top == -1;
+    return top == -1;    
 }
 
 int isFull() {
@@ -15,14 +16,14 @@ int isFull() {
 
 void push() {
     if (isFull()) {
-        printf("Stack Overflow\n");
-        return;
+        printf("Stack Overflow\n"); 
+        return;     //add return dont forget
     }
-    int a;
+    int a;                      //take input here so no worry to call at main func
     printf("Enter element: ");
     scanf("%d", &a);
     top++;
-    stack[top] = a;
+    stack[top] = a; //add new val to top
 }
 
 void pop() {
@@ -30,15 +31,15 @@ void pop() {
         printf("Stack Underflow\n");
         return;
     }
-    printf("%d\n", stack[top]);
-    top--;
+    printf("%d\n", stack[top]); //no else here direct work
+    top--; //to remove from top
 }
 
 void peek() {
     if (isEmpty()) {
         printf("Stack is empty\n");
     } else {
-        printf("Top element: %d\n", stack[top]);
+        printf("Top element: %d\n", stack[top]); //jo bhi val hoga at that time
     }
 }
 
@@ -48,7 +49,7 @@ void display() {
     } else {
         printf("Stack elements:\n");
         for (int i = top; i > -1; i--) {
-            printf("%d\n", stack[i]);
+            printf("%d\n", stack[i]); //[i] is imp to print the stck's val
         }
     }
 }
@@ -59,7 +60,7 @@ int main() {
     while (1) {
         printf("Enter operation:\n1: Push\n2: Pop\n3: Peek\n4: Display\n5: Exit\nChoose: ");
         scanf("%d", &choice);
-
+        //switch case must be inside of while func remember;
         switch (choice) {
             case 1: push();
                     break;

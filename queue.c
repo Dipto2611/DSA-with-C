@@ -30,7 +30,7 @@ void enQ(int value){                //here no val is coming so void used
     printf("Enqueued: %d\n", value); //// Confirmation message
 }
 
-void deQ(){
+void deQ(){   ///in queue front se element del hota h imp
     if(isEmpty()){
         printf("Queue is empty.");
         return ;
@@ -53,7 +53,7 @@ void display(){
     else{
         int i;
         for(i=f;i<=r;i++){  //as f is 1st pos so i=f and "<=" bhery imp to use
-            printf(" %d\t",arr[i]); 
+            printf(" %d\t",arr[i]); //simply f se r tk ka print hoga with arr[vals]
         }
     }
 }

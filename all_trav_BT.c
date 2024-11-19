@@ -1,14 +1,13 @@
+//C prog that have the three Binary tree traversal in it:(Manual)
 #include <stdio.h>
 #include <stdlib.h>
 
-// Define the structure for a node
 typedef struct node {
     int data;
     struct node* left;
     struct node* right;
-} node;
+}node;
 
-// Function to create a new node
 node* createnode(int data) {
     node* newnode = (node*)malloc(sizeof(node));
     newnode->data = data;
@@ -46,7 +45,6 @@ void postorderTraversal(node* root) {
 }
 
 int main() {
-    // Manually create a simple binary tree
     node* root = createnode(1);
     root->left = createnode(2);
     root->right = createnode(3);
@@ -55,7 +53,7 @@ int main() {
     root->right->left = createnode(6);
     root->right->right = createnode(7);
 
-    // Display the tree in different traversal orders
+    //Display all:
     printf("Preorder traversal: ");
     preorderTraversal(root);
     printf("\n");
@@ -70,3 +68,11 @@ int main() {
 
     return 0;
 }
+
+/*
+               1
+             /   \
+           2       3
+         /   \    /   \
+        4     5  6     7
+*/
